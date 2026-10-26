@@ -1,0 +1,49 @@
+@startuml
+left to right direction
+
+actor "Voyageur" as Voyageur
+actor "Machine centrale" as machine
+
+package "Distributeur" {
+  usecase "Acheter" as Acheter
+  usecase "Acheter un billet simple" as AcheterBilletSimple 
+  usecase "Acheter un abonnement hebdomadaire" as Abonnementhebdomadaire
+  usecase "Acheter un abonnement mensuel" as Abonnementmensuel
+  
+  usecase "Erreur" as erreur 
+  usecase "Mise à jour tarifs" as maj 
+  
+  usecase "Plus de papiers" as plusdepapier
+  usecase "Annulation de transaction" as AnnulerTransaction
+  usecase "Temps trop long" as TempsTropLong
+  
+}
+
+
+
+Voyageur --> Acheter
+
+machine --> maj
+Acheter --> AcheterBilletSimple 
+Acheter --> Abonnementhebdomadaire 
+Acheter --> Abonnementmensuel
+
+machine --> plusdepapier 
+
+machine  --> AnnulerTransaction 
+
+machine  --> TempsTropLong 
+
+
+plusdepapier .-> erreur : <<extend>>
+
+AnnulerTransaction .-> erreur : <<extend>>
+
+TempsTropLong .-> erreur : <<extend>>
+
+erreur .-> Acheter : <<extend>>
+
+@enduml
+
+
+
