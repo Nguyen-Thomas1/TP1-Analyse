@@ -50,3 +50,40 @@ fermerouvrirPorte --> deplacerAscenseur : <<include>>
 
 
 @enduml
+
+
+
+Le passager est à l'intérieur de la cabine d'ascenseur et la porte est ouverte ou en cours de fermeture.
+
+
+    Le passager appuie sur le bouton correspondant à l'étage souhaité sur le panneau de commande intérieur.
+
+    Le système enregistre l'étage de destination sélectionné.
+
+    Le système déclenche la fermeture de la porte de l'ascenseur.
+
+    L'ascenseur se déplace vers l'étage de destination.
+
+    Une fois arrivé, la porte s'ouvre pour permettre au passager de sortir et l'interface s'eteint.
+
+2)
+Sommaire d’identité
+TItre : Choisir étage
+
+Résumé : Permet de se déplacer à l’étage voulu
+
+Acteurs : Passager
+
+Condition initiale: Le passager se trouve dans l’ascenseur,portes ouvertes
+Scénario nominal : 
+L’utilisateur appuie sur bouton étage
+Systeme allume panneau affichage
+Systeme ferme les portes
+Systeme déplace l’ascenseur jusqu’a l’étage
+Systeme arrete l’ascenseur à l’étage
+Systeme ouvre les portes
+Passager sort
+Systeme eteint affichage
+Condition de sortie : Le passager est dehors et le système est éteint
+
+
