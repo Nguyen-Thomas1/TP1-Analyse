@@ -1,0 +1,39 @@
+@startuml
+left to right direction
+
+actor "Porteur de carte" as Porteur
+actor "Client MaB'Arnaque" as ClientMaB
+actor "Technicien / Opérateur" as Tech
+actor "Système Bancaire" as SysBnk
+
+Porteur <|-- ClientMaB
+
+package "Guichet Automatique de Banque (GAB)" {
+    usecase "S'authentifier" as Auth
+    usecase "Retirer de l'argent" as Retrait
+    usecase "Consulter le solde" as Solde
+    usecase "Déposer des numéraires" as DepotEspèces
+    usecase "Déposer des chèques" as DepotCheques
+    usecase "Sécuriser la transaction" as Securite
+    usecase "Recharger le distributeur" as Recharger
+}
+
+Porteur --> Retrait
+ClientMaB --> Solde
+ClientMaB --> DepotEspèces
+ClientMaB --> DepotCheques
+
+Retrait --> Auth : <<include>>
+Solde --> Auth : <<include>>
+DepotEspèces --> Auth : <<include>>
+DepotCheques --> Auth : <<include>>
+
+Retrait --> Securite : <<include>>
+Solde --> Securite : <<include>>
+DepotEspèces --> Securite : <<include>>
+DepotCheques --> Securite : <<include>>
+
+Tech --> Recharger
+Auth --> SysBnk
+Retrait --> SysBnk
+@enduml
