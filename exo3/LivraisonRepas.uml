@@ -1,0 +1,37 @@
+@startuml
+left to right direction
+
+actor "Client individuel" as ClientIndiv
+actor "Responsable de groupe" as RespGroupe
+actor "Cuisine industrielle" as Cuisine
+
+package "Portail de livraison de repas" {
+    usecase "S'inscrire" as Inscrire
+    usecase "Gérer l'inscription subventionnée" as Subvention
+    usecase "Choisir les menus" as ChoisirMenu
+    usecase "Choisir par Internet" as ChoixWeb
+    usecase "Choisir par e-mail (Groupe)" as ChoixEmail
+    usecase "Vérifier les régimes alimentaires" as VerifierRegime
+    usecase "Lancer l'ordre de commande" as Commander
+    usecase "Gérer la livraison" as Livrer
+    usecase "Gérer la facturation" as Facturer
+}
+
+ClientIndiv --> Inscrire
+RespGroupe --> Inscrire
+
+Inscrire ..> Subvention : <<extend>>
+
+ClientIndiv --> ChoisirMenu
+RespGroupe --> ChoisirMenu
+
+ChoixWeb .-> ChoisirMenu : <<extend>>
+ChoixEmail .-> ChoisirMenu : <<extend>>
+
+ChoisirMenu --> VerifierRegime : <<include>>
+VerifierRegime --> Commander : <<include>>
+Commander --> Livrer : <<include>>
+Commander --> Facturer : <<include>>
+
+Cuisine --> Commander
+@enduml
