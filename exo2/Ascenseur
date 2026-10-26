@@ -1,0 +1,52 @@
+
+@startuml
+left to right direction
+
+actor "passager" as passager
+
+
+package "Ascenseur" {
+
+usecase "Appuie boutton" as AppuyerBouton
+usecase "Appeler l'Ascenseur" as appelerAscenseur
+usecase "Choisir un étage" as choisirEtage
+usecase "Afficher un message" as affichermessage
+usecase "Fermer/Ouvrir la porte" as fermerouvrirPorte
+usecase "Déplacer l'ascenseur vers la destination" as deplacerAscenseur
+usecase "quitte l'ascenseur" as quitterascenseur
+
+usecase "Eteindre le panneau d'affichage" as eteindreAffichage
+
+
+
+
+}
+
+rectangle "Boutton extérieur" as boutonexterieur
+rectangle "Boutton Intérieur" as boutoninterieur
+
+
+
+passager --> AppuyerBouton
+boutonexterieur --> AppuyerBouton
+boutoninterieur --> AppuyerBouton
+
+AppuyerBouton --> choisirEtage : <<include>>
+AppuyerBouton --> appelerAscenseur : <<include>>
+
+
+AppuyerBouton --> affichermessage : <<include>>
+choisirEtage --> fermerouvrirPorte : <<include>>
+
+appelerAscenseur --> fermerouvrirPorte : <<include>>
+
+
+
+passager --> quitterascenseur : <<include>>
+quitterascenseur --> eteindreAffichage : <<include>>
+
+
+fermerouvrirPorte --> deplacerAscenseur : <<include>>
+
+
+@enduml
